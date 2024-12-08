@@ -1,0 +1,23 @@
+---
+title: "Uvod u kauzalno (uzročno) zaključivanje"
+author: 
+- Aleksandra Novaković 368/22
+- Milica Injac 338/18
+- Bojan Korda 121/19
+
+date: "08.12.2024"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+```
+
+# Fundamentalni problem
+
+# Randomizirani eksperiment
+
+# Opservacione studije
