@@ -26,9 +26,129 @@
 \section{Фундаментални проблем}
 
 - Увод
+In many applications of statistics, a large proportion of the questions of interest are
+fundamentally questions of causality rather than simply questions of description or association.
+For example, a medical researcher may wish to find out whether a new drug is
+effective against a disease. An economist may be interested in uncovering the effects of
+a job-training program on an individual’s employment prospects, or the effects of a new
+tax or regulation on economic activity. A sociologist may be concerned about the effects
+of divorce on children’s subsequent education. In this text we discuss statistical methods
+for studying such questions.
+Causal effects involve the comparison of the outcome actually observed with other potential
+outcomes that could have been observed had the treatment taken on a different level,
+but that are not, in fact, observed. Causal inference is therefore fundamentally a missing
+data problem and, as in all missing data problems, a key role is played by the mechanism
+that determines which data values are observed and which are missing. In causal
+inference, this mechanism is referred to as the assignment mechanism, the mechanism
+that determines levels of the treatment taken by the units studied.
+
+Many of us have seen the movie It’s a Wonderful Life, with
+Jimmy Stewart as George Bailey. In this movie George Bailey becomes very depressed
+and states that the world would have been a better place had he never been born. At
+the appropriate moment an angel appears and shows him what the world would have
+been like had he not been born. The actual world is the real, observed outcome, but the
+8 Causality: The Basic Framework
+angel shows George the other potential outcome, had George not been born. Not only are
+there obvious consequences, like his own children not existing, but there are many other
+untoward events. For example, his younger brother, who was in actual life a World War
+II hero, in the counterfactual world drowns in a skating accident at age eight because
+George was not there to save him. In the counterfactual world a pharmacist fills in a
+wrong prescription and is convicted of manslaughter because George was not there to
+catch the error as he did in the actual world. The causal effect of George not being born
+is the comparison of the entire stream of events in the actual world with George in it, with
+the entire stream of events in the counterfactual world without George in it. In reality we
+would never be able to see both worlds, but in the movie George gets to observe both.
+
+!! BOOK Data analysis using regression
+
+This chapter and the next consider causal inference, which concerns what would
+ happen to an outcome y as a result of a hypothesized “treatment” or intervention.
+ In a regression framework, the treatment can be written as a variable T:1
+ Ti = 1 ifunit i receives the “treatment”
+ 0 if unit i receives the “control,”
+ or, for a continuous treatment,
+ Ti = level of the “treatment” assigned to unit i.
+ In the usual regression context, predictive inference relates to comparisons between
+ units, whereas causal inference addresses comparisons of different treatments if
+ applied to the same units. More generally, causal inference can be viewed as a
+ special case of prediction in which the goal is to predict what would have happened
+ under different treatment options.
+
+
+The use of a controlled study is the most effective way of establishing causality between variables. 
+In a controlled study, the sample or population is split in two, with both groups being comparable in almost every way. 
+The two groups then receive different treatments, and the outcomes of each group are assessed.
     - корелација не повлачи узрочност (пр. продаја сладоледа и бр дављења на плажи)
+    Korelacija i kauzalnost predstavljaju dve različite vrste odnosa između promenljivih. 
+    Korelacija opisuje statističku povezanost: dve promenljive se kreću zajedno na predvidljiv način, 
+    ali to ne znači da promena jedne uzrokuje promenu druge. Kauzalnost, s druge strane, implicira da 
+    promena jedne promenljive direktno dovodi do promene druge, pri čemu postoji uzročna veza. 
+    Dok korelacija meri samo obrasce zajedničkog kretanja podataka, kauzalnost zahteva razumevanje 
+    mehanizma koji povezuje promenljive i obično uključuje kontrolu drugih faktora koji mogu uticati na posmatrani odnos.
+
+ It is a truth universally echoed by scientists that correlation
+ does not imply causation. In daily life, however, the former is
+ frequently mistaken for the latter.
+  Correlation by itself does not imply causation because sta
+tistical relations do not uniquely constrain causal relations.
+In reporting on the study, the chocolate industry
+ was less careful, stating that “eating chocolate produces Nobel
+ prize winners” (Nieburg, 2012).
+ In particular, while chocolate consumption could cause an
+ increase in Nobel Laureates, an increase in Nobel Laureates
+ could likewise underlie an increase in chocolate consump
+tion — possibly due to the resulting festivities, as Messerli
+ (2012) conjectures. More plausibly, unobserved variables
+ such as socio-economic status or quality of the education sys
+tem might cause an increase in both chocolate consumption
+ and Nobel Laureates, thus rendering their correlation spurious,
+ that is, non-causal. The common cause principle states these
+ three possibilities formally (Reichenbach, 1956):
+  If two random variables X and Y are statistically
+ dependent (X Y), then either (a) X causes Y,
+ (b) Y causes X, or (c) there exists a third variable
+ Z that causes both X and Y. Further, X and Y
+ become independent given Z, i.e., X Y Z.
+ Causal inference provides us with tools that allow us to draw
+ causal conclusions even in the absence of a true experiment,
+ given that certain assumptions are fulfilled. These assump
+tions increase in strength as we move up the levels of the
+ causal hierarchy. In the remainder of this paper, I discuss
+ the levels association, intervention, and counterfactuals, as
+ well as the prototypical actions corresponding to each level —
+ seeing, doing, and imagining.  
+ Korelacija i kauzalnost predstavljaju dve različite vrste odnosa između promenljivih. Korelacija opisuje statističku povezanost: dve promenljive se kreću zajedno na predvidljiv način, ali to ne znači da promena jedne uzrokuje promenu druge. Kauzalnost, s druge strane, implicira da promena jedne promenljive direktno dovodi do promene druge, pri čemu postoji uzročna veza. Dok korelacija meri samo obrasce zajedničkog kretanja podataka, kauzalnost zahteva razumevanje mehanizma koji povezuje promenljive i obično uključuje kontrolu drugih faktora koji mogu uticati na posmatrani odnos.
+
+!! BOOK Causal inference the mixtape 
+
+ When the rooster crows, the sun soon after rises, but we know the rooster didn’t cause the sun to rise. Had the rooster been eaten by the farmer’s cat, the sun still would have risen. Yet so often people make this kind of mistake when naively interpreting simple correlations.
+    
+!! BOOK spurious correlations - tyler vigen
+
+- primeri 
+ 
+
+Causality is the area of statistics that is commonly misunderstood and misused by people in the mistaken belief that 
+because the data shows a correlation that there is necessarily an underlying causal relationship. 
+
     - зашто је важно (медицина, друштвене науке, економија)
+    For example, in medical research, one group may receive a placebo while the other group is given a new type of medication. 
+    If the two groups have noticeably different outcomes, the different experiences may have caused the different outcomes.
     - Главне разлике, истраживања, илустрација примером 
+    Simpsonov paradoks
+    Simpsonov paradoks je pojava u kojoj se odnos između dve promenljive menja ili čak potpuno preokreće kada se podaci 
+    posmatraju u celini u poređenju sa njihovim podgrupama. Drugim rečima, korelacija koja važi na agregatnom nivou može 
+    nestati ili se obrnuti kada se podaci razbiju po relevantnim kategorijama.
+
+Ovaj paradoks jasno pokazuje zašto „korelacija ne povlači uzročnost” – naizgled snažna veza može biti posledica prikrivenih 
+(konfaundirajućih) faktora. Klasičan primer je analiza uspešnosti lečenja kod muškaraca i žena: kada se posmatra ukupno, 
+jedna terapija deluje uspešnije, dok kada se podaci razdvoje po polu, ispostavi se da je druga terapija bolja u obe grupe.
+
+Suština Simpsonovog paradoksa je da istu korelaciju možemo tumačiti potpuno drugačije u zavisnosti od nivoa analize. 
+Zato se u kauzalnom zaključivanju naglašava važnost identifikacije i kontrole skrivenih varijabli, kako bismo izbegli 
+pogrešne zaključke.
+
+
 - Фундаментални проблем 
     - Рубинов каузални модел
     - АТЕ (Average Treatment Effect), дефиниција
