@@ -30,6 +30,119 @@
     \subsubsection{Главне разлике, истраживања, илустрација примером}
 \subsection{Фундаментални проблем}
     \subsubsection{Рубинов каузални модел}
+    Fundamentalni problem kauzalnog zaključivanja ogleda se u činjenici da za istu jedinku nikada ne možemo istovremeno posmatrati 
+    oba potencijalna ishoda – onaj koji bi nastao ako je tretman primenjen i onaj koji bi nastao ako tretman nije primenjen. 
+    Drugim rečima, kauzalni efekat na individualnom nivou ostaje uvek delimično nepoznat, jer je jedan od ishoda nužno kontrafaktualan.
+     Ovaj okvir formalizuje Rubinov kauzalni model, u kojem se uvode potencijalni ishodi Y(1) i Y(0), a individualni kauzalni efekat 
+     definiše kao njihova razlika. Međutim, pošto je samo jedan od ta dva ishoda posmatran, istraživači su usmereni na procenu 
+     kontrafaktuala – onoga što bi se desilo u alternativnom scenariju.
+
+Kako individualni efekti nisu direktno dostupni, u praksi se koriste agregatne mere kauzalnog efekta, poput prosečnog tretman efekta 
+(Average Treatment Effect, ATE), definisanog kao E[Y(1)-Y(0)], ili prosečnog efekta na tretirane (Average Treatment Effect on the 
+Treated, ATT), E[Y(1)-Y(0)|T=1]. Ove mere omogućavaju poređenje grupa i daju empirijski smisao istraživanjima u kojima se traži 
+procena uzročnih uticaja. Da bi ovakva analiza bila validna, neophodna je pretpostavka SUTVA (Stable Unit Treatment Value Assumption),
+ koja podrazumeva da ishod jedne jedinke ne zavisi od tretmana drugih jedinki i da ne postoje skrivene varijante tretmana.
+Na taj način, fundamentalni problem kauzalnog zaključivanja objašnjava zašto uzročni efekti nisu neposredno posmatrani, 
+već se moraju definisati kroz kontrafaktualne ishode i procenjivati pomoću statističkih metoda, oslanjajući se na pretpostavke
+ poput SUTVA i mere efekta na nivou populacije.
+
+ https://www.kurims.kyoto-u.ac.jp/~kyodo/kokyuroku/contents/pdf/1703-09.pdf
+
+  whichwedrawarandomsampleof $n$
+ units. Eachunit isabletobeexposedtoeitheratreatment
+ oracontrol.Let $Z_{i}$
+ representarandomvariableoftreatmentassignmentsothat $Z_{i}=1$ ifthe ith
+ unit isassignedtothetreatmentgroupand $Z_{i}=0$ ifthe $i$
+ thunit isassignedtothecontrolgroup.
+ Thus, the ithunithastwopotentialoutcomes, $\}_{i} (1)$
+ ifit isexposedtothetreatmentwhen $Z_{i}=1$,
+ or $Y_{i}(0)$
+ if it isexposedtothecontrolwhen $Z_{i}=0$ . Theobserveddataonthe ithunitconsistof
+ thepair $(Z_{i},Y_{i})$ ,where
+ $\}_{i} =Z_{i}1_{i}^{\nearrow}(1)+(1-Z_{i})Y_{i}(0)$
+ .
+ Theeffectcausedbytheteatmentforthe $i$
+ thunit(relativetothecontrol),orsimplythetreatment
+ effectforthe ithunit, isdefinedas thedifference $l_{i}^{f}(1)-Y_{i}(0)$ . Thisquantitymeasures thegain
+ intheoutcomevariableundertheassignmenttothetreatmentrelativetothecontrol.Wesuppose
+ thateachunitcanbeexposedtoonlythetreatmentorthecontrol, thereforewecanobserveeither
+ $l_{i}(1)$
+ or $Y_{i}(0)$ , butneverboth. That is,either $Y_{i}(1)$
+ or $Y_{i}(0)$
+ ismissingforthe ithunit, implying
+ thatthetreatmenteffectforthe $i$
+ thunit isnotobservable.ThisfactiscalledbyHolland $(|18|)$ the
+ fundamentalptoblemofcausal ilference.
+
+  Tostatisticallyovercomethefundamentalproblemofcausal inference, thefirstthingwedois
+ toreplacethe inferentia]goalofestimatingthetreatmenteffectforan individualunitbyconsider
+ingtheproblemofestimatingtheaveragetreatmenfeffect:
+ $\theta=E\{Y_{i}(1)\}-E\{1_{i}^{\nearrow}(0)\}$ (1)
+
+whercthcexpectationisassumedtobe independentof $i$
+ .Wenotethatsincetheoperationalmean
+ingsofthetworandomvariables $l_{i}(0)$
+ and $1_{i}^{r}(1)$
+ involvetherandomvariable $Z_{i}$
+ , theexpectations
+ $E\{Y_{i}(1)\}$ and $E\{\}_{i}^{-}(0)\}$
+ thereforealmost $a$
+ ]waysdependonthedistributionof $Z_{i}$
+ , thatis.themech
+anismofthetreatmentassignment.More $\exp$]icitly,wecanwrite
+ $E\{Y_{i}(1)\}=E[E\{Y,\cdot(1)\}|Z_{i}]$
+ andsimilar]yfor $E\{1_{i}^{r}(0)\}$
+ .Theaveragetreatmenteffect $\theta$
+ hasthepotential tobeestimatedbecause
+ potentialoutcomes $1_{?}^{\nearrow}\cdot(1)$
+ and $Y_{i}(0)$
+ ondiffercntunitsmaynowbeusedtoestimatetheexpectations
+ $E\{1_{i}^{r}(1)\}$
+ and $E\{]_{i}^{r}(0)\}$
+ . Toachievethisgoal, further $f^{\backslash }undamenta1$
+ assumptionsonthetreatment
+ assignmentmechanismarehoweverrequiredsincetheobservcddata $(Z_{i},l_{i}^{\nearrow})$
+ onlyprovide infor
+mationontheexpectations
+ $E\{Y_{i}|Z_{i}=1\}=E\{Y_{i}(1)|Z_{i}=1\}$ and
+ $E\{Y_{\dot{1}}|Z_{i}=0\}=E\{l_{7}^{r}(0)|Z_{i}=0\}$ .
+ The fundamentalproblemofcausal inferencecanbeovercomebyconsideringtwosuchassump
+tions,namelytheindependenceassumption([18])andtheassumptionofstrongignorabili $O^{}$
+ ([29]).
+ Bothconditions arenatural in the sense that theycanbederivedwhenone $considers^{\backslash}$
+ the rela
+tionsbetweentheexpectations $E\{Y_{i} (1)\},$ $E\{Y_{i}(0)\}$ andtheconditionalexpectations $E\{Y_{1}(1)|Z_{i}=$
+ $1\},$ $E\{Y_{\dot{7}}(0)|Z_{i}. \infty0\}$
+ . The independenceassumptionconcerns theclassical caseofrandomized
+ experiment,whereweassume that the treatmentassignment $Z_{i}$
+ is independentofthepotential
+ outcomes $(l_{i}^{r}(1), l_{i}(0))$
+ andal] otherpotential confoundingvariables. Cansal inference for ran
+domizedexperiment is straightforwardbecauseunderthis independenceassumptionwehavethe
+ basic identities
+ $E\{l_{i} (1)\}=E\{Y_{i}(1)|Z=1\}$
+ $E\{Y_{i}(0)\}=E\{\}_{i} (0)|Z=0\}$ .
+ Thusthe independenceassumptionensurcs that
+ $\theta=E\{Y_{i}(1)|Z=1\}-E\{Y_{i}(0)|Z=0\}$ (2)
+ Sothesampledifferenceinthetwogroups inthiscasewillgiveanunbiasedestimatefor $\theta$
+
+ Praktični kontekst: zašto nam je ATE važan – jer se u društvenim, biomedicinskim i ekonomskim istraživanjima retko bavimo 
+ individualnim efektima, već nas zanima prosečan uticaj tretmana na populaciji.
+
+Ograničenje ATE-a: naglasiti da iako ATE rešava problem kontrafaktuala na individualnom nivou, i dalje zavisi od pretpostavki 
+o dodeli tretmana i mogućih konfaundera (pa zato koristimo randomizaciju, matching, IPW, itd.).
+
+ EstimatingtheAverageTreatmentEffect ovde ide sada metode za procenu ATE 
+
+ Fundamentalni problem kauzalnog zaključivanja → ne možemo posmatrati oba ishoda za istu jedinku (tretiran i netretiran).
+
+Da bismo procenili kauzalni efekat (ATE) → moramo “rekonstruisati” kontrafaktualne ishode korišćenjem statističkih metoda.
+
+Tu dolaze u igru metode poput regresije, matching-a, propensity score weighting-a – sve su to načini da što bolje aproksimiramo 
+nedostajuće kontrafaktualne podatke.
+ .
+
+
     \subsubsection{АТЕ (Average Treatment Effect), дефиниција}
     \subsubsection{проблем контрафактуала, немогућност да посматрамо оба света истовремено}
 \subsection{Математичке основе иза концепта узрочности}
