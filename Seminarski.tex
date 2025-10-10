@@ -5,6 +5,7 @@
 \usepackage[T2A]{fontenc}
 \usepackage[serbianc]{babel}
 \usepackage{hyperref}
+\usepackage{amsmath}
 
 \renewcommand\Authsep{\par}
 \renewcommand\Authands{\par}
@@ -40,11 +41,328 @@
 
 \subsection{Mетодолошки изазови и концепти}
 \subsubsection{Игнорабилност}
+Prvi korak u pristupu opservacionim studijama jeste da se relaksira klasična pretpostavka randomizovanog eksperimenta da je verovatnoća dodele tretmana poznata funkcija. Ipak, u ovom delu teksta zadržavamo pretpostavku nepostojanja konfuzije (unconfoundedness), koja tvrdi da dodela tretmana ne zavisi od potencijalnih ishoda.
+ //U opservacionim studijama ne možemo pretpostaviti da znamo verovatnoću dodele tretmana (jer nema randomizacije). Ali, ako verujemo u pretpostavku unconfoundedness — da su svi bitni faktori koji utiču na dodelu tretmana i ishode posmatrani i uključeni u analizu — onda i dalje možemo procenjivati uzročne efekte.
+ukoliko nema ignorabilnosti tj kontrole kovarijata to je confoundness
+ukoliko kontrolisemo kovarijate to je unconfoundness//
+
+Takođe, nastavljamo da pretpostavljamo da je mehanizam dodele individualistički, tj. da je verovatnoća da jedinica i dobije tretman funkcija samo njenih sopstvenih pre-tretmanskih varijabli, bez zavisnosti od vrednosti pre-tretmanskih varijabli drugih jedinica, тј. важи SUTVA о којој смо причали раније . Još jedna pretpostavka koju zadržavamo jeste da je mehanizam dodele probabilistički, tj. da je verovatnoća primanja bilo kog nivoa tretmana strogo između nule i jedan za sve jedinice.
+
+Implikacija ovih pretpostavki jeste da se mehanizam dodele može interpretirati tako da je, unutar podpopulacija jedinica sa istim vrednostima kovarijata, sproveden potpuno randomizovan eksperiment (kao oni opisani u Poglavljima 5–8), ali sa nepoznatim verovatnoćama dodele za jedinice. Dakle, pod ovim pretpostavkama možemo analizirati podatke iz poduzorka sa istim vrednostima kovarijata kao da potiču iz takvog eksperimenta.
+Iako unapred ne znamo verovatnoće dodele za svaku jedinicu, znamo da su te verovatnoće identične jer imaju iste vrednosti kovarijata. Stoga je, uslovno na broj tretiranih i kontrolnih jedinica u takvoj podpopulaciji, verovatnoća dobijanja tretmana, tj. skor sklonosti (propensity score), jednaka
+
+\[
+e(x) = \frac{N_t(x)}{N_c(x) + N_t(x)} \quad \text{za sve jedinice sa } X_i = x
+\]
+
+\[
+N_c(x) \text{ i } N_t(x) \text{ su broj jedinica u kontrolnoj, odnosno tretmanskoj grupi, 
+sa istom pre-tretmanskom vrednošću } X_i = x.
+\]
+U praksi, ovo saznanje samo po sebi ima ograničenu vrednost, jer obično postoji previše različitih vrednosti kovarijata u uzorku da bi se uzorak mogao podeliti na taj način, a da pri tome  
+
+N
+c
+(x) ili 
+
+N
+t(x) ne budu jednaki nuli u nekim stratumima. Ipak, ovo saznanje ima važnu implikaciju koja sugeriše izvodljive alternative za analizu.
+
+U ovom poglavlju razmatramo neke opšte aspekte pretpostavke unconfoundedness (ignorabilnosti), uključujući i opšte strategije koje preporučujemo u situacijama gde se ova pretpostavka smatra primerenom, i pružamo mapu puta za treći i četvrti deo teksta.
+
+U Odeljku 12.2 razmatramo samu pretpostavku, njene implikacije i zašto smatramo da je postavka sa unconfoundedness-om važan slučaj koji zaslužuje posebnu pažnju. U Odeljku 12.3 dodatno istražujemo jednu specifičnu implikaciju unconfoundedness-a povezanu sa propensity score-om. Čak i ako se koristi veliki skup kovarijata da bi se obezbedila ignorabilnost, u određenom smislu je dovoljno prilagoditi samo na skalarnoj funkciji kovarijata, tj. na skoru sklonosti. Razmatramo balansirajuće svojstvo skora sklonosti i koje druge funkcije kovarijata dele ovo svojstvo.
+
+Zatim, u Odeljku 12.4 iznosimo opšte strategije za procenu i inferenciju pod regularnim mehanizmima dodele. Diskutujemo opšte prednosti različitih strategija i opisujemo metode koje detaljnije razmatramo u narednim poglavljima. U Odeljku 12.5 diskutujemo preliminarne analize koje ne uključuju podatke o ishodima, a koje preporučujemo kao deo onoga što nazivamo fazom dizajna opservacione studije. U Odeljku 12.6 iznosimo kako se u nekim postavkama mogu sprovesti dodatne analize koje pomažu istraživaču da proceni u kojoj meri je pretpostavka unconfoundedness-a verodostojna, iako se generalno ta pretpostavka ne može testirati. Odeljak 12.7 donosi zaključke.
+
+Ključna karakteristika pretpostavke ignorabilnosti jeste to da ona nema direktno proverljive implikacije, čak ni u postavkama sa velikim brojem jedinica. U podacima nema informacija koje mogu pokazati da ignorabilnost ne važi. Naravno, to ne znači da ignorabilnost zaista važi, niti da je uopšte plauzibilna, već da svaka tvrdnja da ona ne važi mora počivati na dodatnim, suštinskim informacijama izvan procene pretpostavki probabilističkog i individualističkog mehanizma dodele.
+
+Da bismo stekli dublji uvid u ovu karakteristiku pretpostavke ignorabilnosti, korisno je razmotriti je u okviru sa velikim uzorkom, gde možemo proceniti zajedničku raspodelu
+\[
+(Y_i^{obs}, W_i, X_i).
+\]
+
+\textbf{Teorema 12.1 (Super-populaciona ignorabilnost).} \\
+Super-populaciona ignorabilnost nameće dva ograničenja na uslovne raspodele potencijalnih ishoda. Prvo:
+\[
+(Y_i(0) \mid W_i = 1, X_i) \sim (Y_i(0) \mid W_i = 0, X_i),
+\]
+i drugo:
+\[
+(Y_i(1) \mid W_i = 0, X_i) \sim (Y_i(1) \mid W_i = 1, X_i),
+\]
+gde znak \(\sim\) označava jednakost u raspodeli.
+
+\textbf{Dokaz.} Po definiciji super-populacione ignorabilnosti (vidi Poglavlje 3, Odeljak 5),
+\[
+W_i \perp (Y_i(0), Y_i(1)) \mid X_i.
+\]
+Iz toga sledi da je
+\[
+Y_i(0) \perp W_i \mid X_i,
+\]
+što dokazuje prvu tvrdnju u Teoremi 12.1. Druga tvrdnja sledi analogno.
+
+Prvo ograničenje kaže da je uslovna raspodela \(Y_i(0)\) dato \(W_i = 1\) i kovarijate \(X_i\) ista kao raspodela \(Y_i(0)\) dato \(W_i = 0\) i \(X_i\). Isto važi i za \(Y_i(1)\).
+
+Drugim rečima, pretpostavka ignorabilnosti podrazumeva jednakost raspodele neposmatranog potencijalnog ishoda (o kome podaci nisu direktno informativni) i raspodele posmatranog ishoda (o kome podaci jesu informativni). U velikim uzorcima možemo proceniti uslovnu raspodelu
+\[
+Y_i^{obs} \mid (W_i, X_i),
+\]
+ali nijedna količina posmatranih podataka nam ne može omogućiti da procenimo raspodelu
+\[
+Y_i^{mis} \mid (W_i, X_i).
+\]
+
+Iako se pretpostavka ignorabilnosti ne može testirati, u nekim slučajevima moguće je sprovesti analize koje mogu pomoći istraživaču pri proceni plauzibilnosti ove ključne pretpostavke. Ove pomoćne analize oslanjaju se na restriktivnije pretpostavke koje ipak generišu proverljive posledice. Takve analize detaljno razmatramo u Poglavlju 21.
+
+Do sada je jedini uslov koji smo postavili za pre-tretmanske varijable taj da one prethode tretmanu, odnosno da same nisu pogođene tretmanom. Varijable koje bi mogle biti pogođene tretmanom, poput INTERMEDIJALNIH ISHODA ne bi trebalo uključivati u ovaj skup, a njihovo pravilno uzimanje u obzir u analizi je uopšteno teško.
+
+Kada imamo odgovarajući skup pre-tretmanskih varijabli, uobičajeno je da želimo da kontrolišemo što je moguće veći broj njih, ili sve. Na primer, ako nas zanima evaluacija programa obuke za tržište rada koji je namenjen pojedincima u nepovoljnom položaju na tržištu rada, poželjno je uključiti detaljne radne istorije i individualne karakteristike tih pojedinaca, kako bismo eliminisali mogućnost da razlike u ishodima između polaznika i kontrolne grupe potiču upravo od tih karakteristika, a ne od samog programa.
+
+Postoje, međutim, izuzeci od ovog opšteg pravila. U nekim slučajevima dodatne prethodne informacije o zavisnosti potencijalnih ishoda od pre-tretmanskih varijabli mogu sugerisati alternativne strategije procene, koje ne uklanjaju razlike u svim posmatranim pre-tretmanskim varijablama. Jedan važan slučaj su INSTRUMENTALNE VARIJABLE, o kojima se detaljnije govori u Poglavljima 23–25.
+
+U praksi su ovakvi slučajevi, ipak, retki i obično ih je lako prepoznati, a još ređe dolazi do zabune. Naime, varijable koje su zaista instrumentalne relativno su retke, a kada i postoje, još je ređe da se pogrešno koriste kao kovarijate za prilagođavanje
+
+
+ignorabilnost je vazna pretpostavka kada su u pitanjju regularni mehanizmi dodele o kojima mislim da necu pisati
+
 \subsubsection{Оверлап}
+
+
 \subsubsection{Контролисање претретманских предиктора, никако постретманских}
+
 \subsection{Методе и технике за решавање проблема}
+
 \subsubsection{Propensity scores}
+
+Propensity score je uslovna  verovatnoca da odredjena jedinica dobije tretman, uzimajuci u obzir posmatrane prediktore. Teorija i za velike i za male uzorke pokazuje da je prilagođavanje za skalarnu veličinu propensity score-a dovoljno da se ukloni pristrasnost uzrokovana svim posmatranim kovarijatama. Propensity score je vazan alat za matching, stratifikaciju, ponderisanje itd, o cemu ce biti reci kasnije. Takodje, propensity score je vrsta balansirajuceg skora.
+
+Sada se vratimo na teorijsku raspravu, koristeći perspektivu super-populacije.
+Pod pretpostavkom ignorabilnosti, možemo ukloniti sve pristrasnosti u poređenju između tretirane i kontrolne grupe tako što ćemo se prilagoditi razlikama u posmatranim kovarijatama. Iako je to u principu izvodljivo, u praksi je teško primeniti kada postoji veliki broj kovarijata.
+
+Ideja balansirajućih skorova jeste da pronađemo funkcije kovarijata niže dimenzionalnosti koje su dovoljne za uklanjanje pristrasnosti povezane sa razlikama u pre-tretmanskim varijablama.
+
+////////////////////////////////////////////////////////////////////////////////////
+Formalno, balansirajući skor je funkcija kovarijata takva da je verovatnoća (u super-populaciji) dobijanja aktivnog tretmana uslovljena kovarijatama nezavisna od samih kovarijata kada se uzme u obzir balansirajući skor.
+Definicija 12.1 (Balansirajući skorovi)
+Balansirajući skor $b(x)$ je funkcija kovarijata takva da važi:
+
+\( W_i \;\perp\; X_i \;\mid\; b(X_i) \)
+
+(Ovde i dalje prećutno ostavljamo uslovljavanje na parametre u kontekstu super-populacije.)
+
+Balansirajući skorovi nisu jedinstveni. Po definiciji, sam vektor kovarijata \( X_i \) je balansirajući skor, a svaka jednoznačna funkcija balansirajućeg skora takođe je balansirajući skor. Najviše nas zanimaju balansirajući skorovi niske dimenzionalnosti.
+
+Jedan skalarni balansirajući skor jeste propensity score (skor sklonosti), uslovna verovatnoća primanja tretmana kada je \( X_i = x \):
+
+\[ e(x) = \Pr(W_i = 1 \mid X_i = x) \]
+
+ili bilo koja jednoznačna transformacija propensity skora, kao što su linearizovani propensity score ili log-odds odnos:
+
+\[ \ell(x) = \ln \left(\frac{e(x)}{1 - e(x)}\right) \]
+
+Najpre ćemo pokazati da je propensity score zaista balansirajući skor.
+
+Lema 12.1 (Balansirajuće svojstvo propensity skora)
+Propensity score je balansirajući skor.
+
+Dokaz. Pokazujemo da važi:
+
+\[ W_i \;\perp\; X_i \;\mid\; e(X_i) \]
+
+ili, ekvivalentno,
+
+\[ \Pr(W_i = 1 \mid X_i, e(X_i)) = \Pr(W_i = 1 \mid e(X_i)) \]
+
+što implicira da je \( W_i \) nezavisan od \( X_i \) uslovno na propensity score.
+
+Prvo, razmotrimo levu stranu:
+
+\[ \Pr(W_i = 1 \mid X_i, e(X_i)) = \Pr(W_i = 1 \mid X_i) = e(X_i), \]
+
+gde prvo jednakost važi zato što je propensity score funkcija od \( X_i \), a druga jednakost sledi iz definicije propensity skora.
+
+Drugo, razmotrimo desnu stranu.
+
+
+//Balansirajući skor je funkcija kovarijata (pre-tretmanskih varijabli) koja ima jedno ključno svojstvo:
+Kada kondicioniramo na tu funkciju, raspodela kovarijata ne zavisi od dodele tretmana.
+Formalno, za balansirajući skor \( b(X) \) važi:
+
+\( W \perp X \mid b(X) \)
+
+
+što znači da su tretman \( W \) i kovarijate \( X \) nezavisni kada znamo vrednost \( b(X) \).//
+
+
+Po definiciji verovatnoće i iteriranih očekivanja:
+\[
+\Pr(W_i = 1 \mid \mathit{e}(X_i)) 
+= \mathbb{E}\bigl[ W_i \mid \mathit{e}(X_i) \bigr]
+= \mathbb{E}\Bigl[ \mathbb{E}[ W_i \mid X_i, \mathit{e}(X_i) ] \;\Big|\; \mathit{e}(X_i) \Bigr]
+= \mathbb{E}\bigl[ \mathit{e}(X_i) \mid \mathit{e}(X_i) \bigr]
+= \mathit{e}(X_i).
+\]
+
+
+Balansirajući skorovi imaju jedno važno svojstvo: ako je dodela tretmana ignorabilna uslovno na punom skupu kovarijata, onda je dodela takođe ignorabilna i kada uslovljavamo samo na balansirajući skor.
+Lema 12.2 (Ignorabilnost uslovljena balansirajućim skorom)
+Pretpostavimo da je dodela tretmana ignorabilna. Tada je dodela ignorabilna i uslovno na bilo koji balansirajući skor:
+
+W_i \;\perp\; \{Y_i(0), Y_i(1)\} \;\mid\; b(X_i)
+
+
+Dokaz. Pokazaćemo da
+
+\Pr(W_i = 1 \mid Y_i(0), Y_i(1), b_i) \;=\; \Pr(W_i = 1 \mid b(X_i))
+
+
+što je ekvivalentno tvrdnji iz leme. Prema definiciji verovatnoće i iteriranih očekivanja možemo napisati:
+
+\Pr(W_i = 1 \mid Y_i(0), Y_i(1), b(X_i)) 
+= \mathbb{E}[W_i \mid Y_i(0), Y_i(1), b_i]
+
+= \mathbb{E}\Big[\, \mathbb{E}[W_i \mid Y_i(0), Y_i(1), X_i, b_i] \;\Big|\; Y_i(0), Y_i(1), b(X_i)\Big]
+
+
+Po pretpostavci ignorabilnosti, unutrašnje očekivanje je jednako
+
+\mathbb{E}[W_i \mid X_i, b(X_i)]
+
+
+a po definiciji balansirajućih skorova, ovo je jednako
+
+\mathbb{E}[W_i \mid b(X_i)]
+
+
+Dakle, poslednji izraz je jednak
+
+\mathbb{E}\Big[\mathbb{E}[W_i \mid b(X_i)] \,\Big|\, Y_i(0), Y_i(1), b(X_i)\Big] 
+= \mathbb{E}[W_i \mid b(X_i)] 
+= \Pr(W_i = 1\mid b(X_i))
+
+
+što je jednako desnoj strani. ✅
+//////////////////////////////////////////////////////////////////////////
+
+Prva implikacija Leme 12.2 je da, dat vektor kovarijata koji obezbeđuje ignorabilnost, prilagođavanje razlika između tretmana i kontrole samo po balansirajućim skorovima dovoljno je da se uklone sve pristrasnosti povezane sa razlikama u kovarijatama. Intuicija je da je, uslovno na balansirajući skor, dodela tretmana nezavisna od kovarijata. Dakle, čak i ako je neka kovarijata povezana sa potencijalnim ishodima, razlike u kovarijatama između tretiranih i kontrolnih jedinica ne vode do pristrasnosti, jer se poništavaju uporedjivanjem(prosecenjem) unutar jedinica koje imaju istu vrednost balansirajućeg skora, sto cemo opisati kasnije(matching, stratifikacija...). Situacija je analogna potpuno randomizovanom eksperimentu, gde je raspodela kovarijata ista u obe grupe.
+
+Pošto je propensity score balansirajući skor, Lema 12.2 implicira da je, uslovno na propensity score, dodela tretmana ignorabilna, tj., mozemo racunati da je dodela tretmana slucajna. Međutim, unutar klase balansirajućih skorova, propensity score ima posebno mesto, što je formalno opisano u sledećoj lemi:
+
+Lema 12.3 (Grubost balansirajućih skorova)
+Propensity score je najgrublji balansirajući skor. Drugim rečima, propensity score je funkcija svakog balansirajućeg skora.
+
+Dokaz. Neka je 
+𝑏
+(
+𝑥
+)
+b(x) balansirajući skor. Pretpostavimo da ne možemo da izrazimo propensity score kao funkciju balansirajućeg skora. Onda mora važiti da za dve vrednosti 
+𝑥
+x i 
+𝑥
+′
+x
+′
+ imamo
+
+b(x) = b(x')
+
+
+a u isto vreme
+
+e(x) \neq e(x').
+
+
+Tada važi
+
+\Pr(W_i = 1 \mid X_i = x) = e(x),
+
+
+i
+
+\Pr(W_i = 1 \mid X_i = x') = e(x').
+
+
+Ali, kako je 
+𝑏
+(
+𝑥
+)
+=
+𝑏
+(
+𝑥
+′
+)
+b(x)=b(x
+′
+), sledi
+
+e(x) \neq e(x') \;\;\Rightarrow\;\; 
+\Pr(W_i = 1 \mid X_i = x) \neq \Pr(W_i = 1 \mid X_i = x'),
+
+
+što znači da \[
+W_i, \quad X_i
+\]
+ nisu nezavisni uslovno na b(X_i) = b(x), što krši definiciju balansirajućeg skora.
+
+Dakle, pošto je propensity score najgrublji mogući balansirajući skor, on daje najveću korist u smislu smanjenja broja varijabli za koje treba da se prilagođavamo. Važna poteškoća, međutim, nastaje iz činjenice da ne znamo pravu vrednost propensity score-a za sve jedinice, pa ovaj rezultat ne možemo direktno iskoristiti.
+
+//
+Ali među svim tim funkcijama, propensity score 
+e(X)=Pr(W=1∣X) je „najgrublji“ — tj. sažima kovarijate u najmanji mogući broj informacija koje i dalje čuvaju balans.
+Drugim rečima: svaki drugi balansirajući skor može da se „prevede“ u propensity score, ali obrnuto ne mora.
+//
+
+
+Procena Propensity scora
+
+Mnoge procedure za procenjivanje i ispitivanje kauzalnih efekata pod pretpostavkom nepostojanja konfuzije (unconfoundedness) uključuju propensity score (verovatnoću dobijanja tretmana uslovljenu kovarijatama). U praksi je retko da unapred znamo propensity score, osim u slučajevima koji obuhvataju randomizovane eksperimente. Takva praktična podešavanja mogu imati složene dizajne u kojima se verovatnoće na nivou jedinica razlikuju na poznate načine.
+//////////////////////////
+Primer za to je raspodela upisa studenata koji su se prijavljivali na studije medicine u Holandiji tokom osamdesetih i devedesetih godina. Na osnovu ocena iz srednje škole, kandidatima je bio dodeljivan prioritetni skor koji je određivao njihovu verovatnoću za upis na medicinski fakultet. Sam upis na medicinski fakultet zatim se zasnivao na (slučajnoj) lutriji.
+/////////////////////////
+
+Međutim, takve situacije su retke. Češće se dešava da istraživač, na osnovu podataka o karakteristikama jedinica pre tretmana koje posmatramo kao prediktore, smatra da je razumno pretpostaviti da vazi ignorabilnost, iako ne zna tačno kako te karakteristike utiču na verovatnoću dobijanja tretmana tj propensity socre.
+Na primer, u mnogim medicinskim kontekstima odluke se zasnivaju na skupu klinički relevantnih karakteristika pacijenata koje lekari uoče i unesu u medicinsku dokumentaciju. Ipak, obično ne postoji eksplicitno pravilo koje zahteva od lekara da izaberu određeni tretman na osnovu konkretnih vrednosti pre-treatment varijabli. Zbog takvog stepena diskrecije lekara, ne postoji eksplicitno poznat oblik propensity score-a.
+
+U takvim slučajevima, istraživač mora da proceni propensity score. U ovom poglavlju razmatramo konkretne metode za to.
+
+U ovom poglavlju jedini fokus je na statističkom problemu procene uslovne verovatnoće primanja tretmana dato posmatranim kovarijatama:
+
+\[
+\Pr(W_i = 1 \mid X_i = x) = \mathbb{E}[W_i \mid X_i = x]
+\]
+što je jednako propensity score-u superpopulacije e(x), i tu ćemo notaciju koristiti. (Radi jednostavnosti, i dalje izostavljamo uslovljavanje na parametre koji upravljaju ovim raspodelama.)
+
+Ako je kovarijata \(X_i\) binarna skalarna veličina, ili, opštije, može da poprimi samo nekoliko vrednosti, statistički problem procene propensity score-a je jednostavan: možemo jednostavno podeliti uzorak na poduzorke koji su homogeni u vrednostima kovarijata i proceniti propensity score za svaki poduzorak kao udeo tretiranih jedinica u tom poduzorku, sto cesto  nije moguce. Zbog toga se u ovom poglavlju eksplicitno fokusiramo na situacije u kojima kovarijate mogu da poprime previše vrednosti da bi potpuno saturisan model bio moguć, pa je neka forma uglađivanja (smoothing) neophodna.
+
+
 \subsubsection{Matching}
+Matching procene
+
+Za razliku od metoda imputacije zasnovane na modelima, metoda ponderisanja i metoda blokiranja, četvrti pristup – matching – ne oslanja se uvek na procenu nepoznate funkcije. Umesto toga, on se zasniva na nalaženju direktnih poređenja, tj. „parnjaka“, za svaku jedinicu.
+
+Za datu tretiranu jedinicu sa određenim skupom vrednosti kovarijata, traži se kontrolna jedinica sa što sličnijim skupom kovarijata. Ovaj pristup ima veliku intuitivnu privlačnost.
+
+Na primer, pretpostavimo da želimo da procenimo efekat programa obuke za posao na ishode na tržištu rada za određenu osobu – recimo, tridesetogodišnju ženu sa dvoje dece mlađe od šest godina, sa završenom srednjom školom i četiri meseca radnog iskustva u prethodnih dvanaest meseci, koja je prošla kroz program obuke.
+
+U matching pristupu, tražimo osobu iz kontrolne grupe koja je takođe tridesetogodišnja žena sa dvoje dece mlađe od šest godina, sa srednjom školom i četiri meseca radnog iskustva u prethodnih dvanaest meseci, ali koja nije pohađala program obuke. Ako se takva tačna poklapanja mogu naći, ovo je posebno atraktivna i jednostavna strategija.
+
+Međutim, ako se tačna poklapanja ne mogu pronaći – što je uobičajeno kada je broj kovarijata veliki u poređenju sa brojem jedinica – ovaj pristup postaje teže izvodljiv. U tom slučaju potrebno je proceniti kompromise različitih odstupanja od tačnog poklapanja.
+
+Na primer, koga da koristimo kao „parnjaka“ za pomenutu ženu koja je prošla program?
+
+Jedna mogućnost može biti žena iz kontrolne grupe koja je četiri godine starija, ali sa dva meseca više radnog iskustva.
+
+Druga mogućnost može biti žena koja je dve godine mlađa, sa samo jednim detetom i dva meseca manje radnog iskustva u prethodnih dvanaest meseci.
+
+Procena relativnih prednosti takvih poklapanja zahteva pažljivo razmatranje zajedničke raspodele kovarijata i suštinsko znanje o relativnoj važnosti različitih karakteristika za predviđanje ishoda.
+
+Jasno je da, čim se moraju praviti ovakvi kompromisi, matching postaje teži za implementaciju. Problemi koji nastaju kada postoji mnogo kovarijata javljaju se ovde u drugačijem obliku nego kod metoda imputacije zasnovanih na modelima, ali ne nestaju. Kada ima mnogo kovarijata, kvalitet poklapanja – meren nekim metričkim pokazateljem tipične udaljenosti između kovarijata jedinica i njihovih „parnjaka“ – opada.
+
+Da bi se pristup matching uspešno primenio, mora se proceniti kompromis između različitih mogućih kontrola, a za to je neophodna metrika udaljenosti. O nekim izborima koji su korišćeni u literaturi govori se u Poglavlju 18.
 \subsubsection{Постстратификација}
 \subsubsection{Инструментални предиктори}
 \subsection{Потенцијалне замке и провере}
