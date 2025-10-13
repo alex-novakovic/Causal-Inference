@@ -30,118 +30,90 @@
     \subsubsection{Главне разлике, истраживања, илустрација примером}
 \subsection{Фундаментални проблем}
     \subsubsection{Рубинов каузални модел}
-    Fundamentalni problem kauzalnog zaključivanja ogleda se u činjenici da za istu jedinku nikada ne možemo istovremeno posmatrati 
-    oba potencijalna ishoda – onaj koji bi nastao ako je tretman primenjen i onaj koji bi nastao ako tretman nije primenjen. 
-    Drugim rečima, kauzalni efekat na individualnom nivou ostaje uvek delimično nepoznat, jer je jedan od ishoda nužno kontrafaktualan.
-     Ovaj okvir formalizuje Rubinov kauzalni model, u kojem se uvode potencijalni ishodi Y(1) i Y(0), a individualni kauzalni efekat 
-     definiše kao njihova razlika. Međutim, pošto je samo jedan od ta dva ishoda posmatran, istraživači su usmereni na procenu 
-     kontrafaktuala – onoga što bi se desilo u alternativnom scenariju.
 
-Kako individualni efekti nisu direktno dostupni, u praksi se koriste agregatne mere kauzalnog efekta, poput prosečnog tretman efekta 
-(Average Treatment Effect, ATE), definisanog kao E[Y(1)-Y(0)], ili prosečnog efekta na tretirane (Average Treatment Effect on the 
-Treated, ATT), E[Y(1)-Y(0)|T=1]. Ove mere omogućavaju poređenje grupa i daju empirijski smisao istraživanjima u kojima se traži 
-procena uzročnih uticaja. Da bi ovakva analiza bila validna, neophodna je pretpostavka SUTVA (Stable Unit Treatment Value Assumption),
- koja podrazumeva da ishod jedne jedinke ne zavisi od tretmana drugih jedinki i da ne postoje skrivene varijante tretmana.
-Na taj način, fundamentalni problem kauzalnog zaključivanja objašnjava zašto uzročni efekti nisu neposredno posmatrani, 
-već se moraju definisati kroz kontrafaktualne ishode i procenjivati pomoću statističkih metoda, oslanjajući se na pretpostavke
- poput SUTVA i mere efekta na nivou populacije.
+Фундаментални проблем каузалног закључивања, како га је назвао Пол Холанд 1986. године, чињеница да за сваку појединачну јединицу (особу, објекат) која је 
+предмет истраживања може бити посматран само један од два потенцијална исхода. То значи да не можемо истовремено посматрати шта се дешава са једним појединцем након 
+што је примио третман (нпр. $T=1$) и шта се дешава са тим истим појединцем након што није примио третман (нпр. $T=0$), у истом тренутку. Другим речима, каузални ефекат 
+на индивидуалном нивоу увек остаје делимично непознат, јер је један од исхода нужно контрафактуалан (непосматран, хипотетички исход, супротан посматраним чињеницама).
+Због ове немогућности истовременог посматрања, никада не можемо директно измерити индивидуални каузални ефекат.
 
- https://www.kurims.kyoto-u.ac.jp/~kyodo/kokyuroku/contents/pdf/1703-09.pdf
+Доналд Рубин је 1974. године формализовао овај проблем и увео основни језик за кодирање каузалности. Овај модел назива се Рубинов Каузални Модел (РЦМ), састоји се 
+из три градивна блока, кључних за дефинисање каузалног ефекта.
+\begin{enumerate}
+    \item \textbf{Потенцијални исходи} За сваку јединку $i$, дефинишу се два потенцијална исхода, $Y_i^1$ или $Y_i^0$ у зависности од тога да ли 
+    је јединка примила третман ($T_i=1$) или није ($T_i=0$). Пре доношења одлуке о додели третмана, оба ова стања су теоретски изводљива за сваку јединку па се каузални 
+    ефекат дефинише као разлика потенцијалних исхода, односно $\Delta^Y_i = Y_i^1 - Y_i^0$.
+    \item \textbf{Правило доделе третмана} То је променљива $D_i$ која одлучује ко прима третман ($Т_i=1$) и ко остаје у контролној групи ($Т_i=0$). Правило 
+    доделе је кључно јер одређује који од два потенцијална исхода ће бити посматран. Механизам додељивања третмана је важан јер утиче на очекиване вредности потенцијалних исхода.
+    \item \textbf{Једначина преклапања, прекидна једначина} Ова једначина повезује посматрани исход $Y_i$ са потенцијалним исходима, преко променљиве $D_i$: $Y_i = D_i Y^1_i + (1 - D_i) Y^0_i$.
+    Оне објашњава да посматрамо само исход који одговара третману који је заиста примљен.
+\end{enumerate}
+РЦМ је, у суштини, модел о делимично посматраним случајним варијаблама па се каузално закључивање може посматрати као предвиђање шта би се догодило са јединицом $i$ 
+ако би $D_i=0$ или $D_i=1$.
 
-  whichwedrawarandomsampleof $n$
- units. Eachunit isabletobeexposedtoeitheratreatment
- oracontrol.Let $Z_{i}$
- representarandomvariableoftreatmentassignmentsothat $Z_{i}=1$ ifthe ith
- unit isassignedtothetreatmentgroupand $Z_{i}=0$ ifthe $i$
- thunit isassignedtothecontrolgroup.
- Thus, the ithunithastwopotentialoutcomes, $\}_{i} (1)$
- ifit isexposedtothetreatmentwhen $Z_{i}=1$,
- or $Y_{i}(0)$
- if it isexposedtothecontrolwhen $Z_{i}=0$ . Theobserveddataonthe ithunitconsistof
- thepair $(Z_{i},Y_{i})$ ,where
- $\}_{i} =Z_{i}1_{i}^{\nearrow}(1)+(1-Z_{i})Y_{i}(0)$
- .
- Theeffectcausedbytheteatmentforthe $i$
- thunit(relativetothecontrol),orsimplythetreatment
- effectforthe ithunit, isdefinedas thedifference $l_{i}^{f}(1)-Y_{i}(0)$ . Thisquantitymeasures thegain
- intheoutcomevariableundertheassignmenttothetreatmentrelativetothecontrol.Wesuppose
- thateachunitcanbeexposedtoonlythetreatmentorthecontrol, thereforewecanobserveeither
- $l_{i}(1)$
- or $Y_{i}(0)$ , butneverboth. That is,either $Y_{i}(1)$
- or $Y_{i}(0)$
- ismissingforthe ithunit, implying
- thatthetreatmenteffectforthe $i$
- thunit isnotobservable.ThisfactiscalledbyHolland $(|18|)$ the
- fundamentalptoblemofcausal ilference.
+Да би потенцијални исходи били добро дефинисани, неопходна је претпоставка о стабилној вредности третмана јединице (\textit{eng. Stable Unit Treatment Value Assumption, SUTVA}), 
+која подразумева да исход једне јединке не зависи од третмана других и да не постоје скривене варијанте третмана. 
+Na primer, ishod jedne osobe koja prima transplantaciju srca ne bi trebalo da zavisi od toga da li je i druga osoba primila transplantaciju.
+npr. različiti hirurzi, procedure, oprema
 
-  Tostatisticallyovercomethefundamentalproblemofcausal inference, thefirstthingwedois
- toreplacethe inferentia]goalofestimatingthetreatmenteffectforan individualunitbyconsider
-ingtheproblemofestimatingtheaveragetreatmenfeffect:
- $\theta=E\{Y_{i}(1)\}-E\{1_{i}^{\nearrow}(0)\}$ (1)
+Како индивидуални ефекти нису директно доступни, у пракси се користе користе агрегатне мере каузалног ефекта, попут просечног ефекта третмана 
+(\textit{eng. Average Treatment Effect, ATE}), $\theta = E{Y_i(1)} - E{Y_i(0)}$, или просечног ефекта на третиране (\textit{eng. Average Treatment Effect on the Treated, ATT}), 
+$\Delta^Y_{TT} = E{Y_i^1 - Y_i^0 | D_i=1}$. Ове мере омогућавају поређење група и дају емпиријски смисао истраживањима у којима се тражи процена узрочних утицаја. Да би 
+се ови просечни ефекти могли проценити, поред СУТВА, потребне је и кључна статистичка претпоставка о јакој игнорабилности, која укључује:
+\begin{itemize}
+    \item \textbf{Неконфузност} Потенцијални исходи су независни од доделе третмана, условљено коваријатама\footnote{Предтретмантске контролне променљиве $X_i$ су све оне које су посматране или мерене 
+пре него што је јединка примила третман. Служе као улазни подаци у регресионим моделима ради постизања условне заменљивости између третиране и контролне групе.}:
+$$
+(Y^1_i, Y^0_i) \perp D_i | X_i
+$$
+Ово значи да је, унутар слојева дефинисаних коваријатама, третман насумично додељен. Неконфузност је од суштинског значаја за елиминисање пристрасности услед селекције и посебно 
+је важна у опсервационим студијама.
+    \item \textbf{Позитивност} За сваку комбинацију вредности коваријата $X$, постоји ненула вероватноћа да ће јединица примити и третман и контролу:
+$$
+0 < Pr(D_i=1|X_i=x) < 1
+$$
+У случају кршења ове претпоставке, просечан каузални ефекат не може бити процењен ни са бесконачном количином података. Позитивност је кључна за методе засноване на 
+вероватноћи третмана(\textit{eng. Propensity Score}), јер се условна средња вредност не може дефинисати ако је вероватноћа примања третмана, за дату комбинацију коваријата, једнака нули.
+\end{itemize}
 
-whercthcexpectationisassumedtobe independentof $i$
- .Wenotethatsincetheoperationalmean
-ingsofthetworandomvariables $l_{i}(0)$
- and $1_{i}^{r}(1)$
- involvetherandomvariable $Z_{i}$
- , theexpectations
- $E\{Y_{i}(1)\}$ and $E\{\}_{i}^{-}(0)\}$
- thereforealmost $a$
- ]waysdependonthedistributionof $Z_{i}$
- , thatis.themech
-anismofthetreatmentassignment.More $\exp$]icitly,wecanwrite
- $E\{Y_{i}(1)\}=E[E\{Y,\cdot(1)\}|Z_{i}]$
- andsimilar]yfor $E\{1_{i}^{r}(0)\}$
- .Theaveragetreatmenteffect $\theta$
- hasthepotential tobeestimatedbecause
- potentialoutcomes $1_{?}^{\nearrow}\cdot(1)$
- and $Y_{i}(0)$
- ondiffercntunitsmaynowbeusedtoestimatetheexpectations
- $E\{1_{i}^{r}(1)\}$
- and $E\{]_{i}^{r}(0)\}$
- . Toachievethisgoal, further $f^{\backslash }undamenta1$
- assumptionsonthetreatment
- assignmentmechanismarehoweverrequiredsincetheobservcddata $(Z_{i},l_{i}^{\nearrow})$
- onlyprovide infor
-mationontheexpectations
- $E\{Y_{i}|Z_{i}=1\}=E\{Y_{i}(1)|Z_{i}=1\}$ and
- $E\{Y_{\dot{1}}|Z_{i}=0\}=E\{l_{7}^{r}(0)|Z_{i}=0\}$ .
- The fundamentalproblemofcausal inferencecanbeovercomebyconsideringtwosuchassump
-tions,namelytheindependenceassumption([18])andtheassumptionofstrongignorabili $O^{}$
- ([29]).
- Bothconditions arenatural in the sense that theycanbederivedwhenone $considers^{\backslash}$
- the rela
-tionsbetweentheexpectations $E\{Y_{i} (1)\},$ $E\{Y_{i}(0)\}$ andtheconditionalexpectations $E\{Y_{1}(1)|Z_{i}=$
- $1\},$ $E\{Y_{\dot{7}}(0)|Z_{i}. \infty0\}$
- . The independenceassumptionconcerns theclassical caseofrandomized
- experiment,whereweassume that the treatmentassignment $Z_{i}$
- is independentofthepotential
- outcomes $(l_{i}^{r}(1), l_{i}(0))$
- andal] otherpotential confoundingvariables. Cansal inference for ran
-domizedexperiment is straightforwardbecauseunderthis independenceassumptionwehavethe
- basic identities
- $E\{l_{i} (1)\}=E\{Y_{i}(1)|Z=1\}$
- $E\{Y_{i}(0)\}=E\{\}_{i} (0)|Z=0\}$ .
- Thusthe independenceassumptionensurcs that
- $\theta=E\{Y_{i}(1)|Z=1\}-E\{Y_{i}(0)|Z=0\}$ (2)
- Sothesampledifferenceinthetwogroups inthiscasewillgiveanunbiasedestimatefor $\theta$
+У практичном контексту, ATE омогућава да проценимо колики би био очекивани ефекат третмана када би се применио 
+на целу циљну групу, јер се у друштвеним, биомедицинским и економским истраживањима ретко усредсређујемо на индивидуалне ефекте. 
+Уместо тога, истраживаче углавном занима просечан утицај третмана на популацији, што има директне импликације за 
+креирање јавних политика, медицинске интервенције или економске мере.
 
- Praktični kontekst: zašto nam je ATE važan – jer se u društvenim, biomedicinskim i ekonomskim istraživanjima retko bavimo 
- individualnim efektima, već nas zanima prosečan uticaj tretmana na populaciji.
+Ипак, ATE има и одређена унутрашња ограничења која је важно разумети приликом њене интерпретације:
+\begin{enumerate}
+    \item \textbf{Неидентификованост индивидуалних ефеката:}
+Како индивидуални ефекти нису директно доступни, ATE се односи на просечан каузални ефекат у популацији, а не на појединачне јединице.
+    \item \textbf{Прикривање хетерогености ефеката:}
+Како АТЕ представља просек ефекта у популацији, она може прикрити значајне разлике међу појединцима или подгрупама. На пример, ако третман једнако помаже 
+једној половини популације, а одмаже другој, просечни ефекат може бити нула, иако су индивидуални ефекти изражени и хетерогени.
+    \item \textbf{Зависност од карактеристика популације:}  
+Величина ATE-а зависи од дистрибуције индивидуалних ефеката у посматраној популацији. Ако одређени фактори (нпр. пол, старост или социоекономски статус) модификују 
+ефекат третмана, ATE ће се разликовати између популација са различитом структуром ових фактора. Стога, ова мера није нужно стабилна при преношењу резултата на друге 
+популације.
+    \item \textbf{Зависност од претпоставки и механизма доделе третмана:}  
+Процена ATE-а у великој мери почива на претпоставкама о начину доделе третмана и о одсуству конфаундерa. Уколико третман није насумично додељен и ако нису 
+задовољене кључне претпоставке попут неконфузности и позитивности, процене ATE-а могу бити пристрасне.
+    \item \textbf{Предиктивни, а не објашњавајући карактер:}  
+Каузално закључивање се може посматрати као предвиђање онога што би се догодило јединки $i$ под различитим условима третмана, стога ATE даје просечну предикцију за 
+целу популацију.
+\end{enumerate}
 
-Ograničenje ATE-a: naglasiti da iako ATE rešava problem kontrafaktuala na individualnom nivou, i dalje zavisi od pretpostavki 
-o dodeli tretmana i mogućih konfaundera (pa zato koristimo randomizaciju, matching, IPW, itd.).
+С обзиром на наведена ограничења, процена ATE-а у пракси захтева пажљиво осмишљене статистичке приступе који омогућавају да се „реконструишу” недостајући 
+контрафактуални исходи. Циљ ових метода је да, под одређеним претпоставкама, омогуће непристрасну и 
+поуздану процену просечних ефеката третмана. У зависности од контекста истраживања и начина доделе третмана, користе се различите стратегије као што су 
+регресиони естиматори, методе засноване на вероватноћи третмана, метода упаривања јединица са сличним карактеристикама. Све ове методе имају 
+заједнички циљ: да обезбеде што бољу апроксимацију контрафактуалних исхода и тиме омогуће валидно каузално закључивање.
 
- EstimatingtheAverageTreatmentEffect ovde ide sada metode za procenu ATE 
+Процена ATE-а и илустрација приближавања контрафактуалних исхода указују на ограничења једноставних просечних ефеката и потребу за методама које контролишу доделу 
+третмана и конфаундере. У наредним деловима рада разматраћемо рандомизоване експерименте, где насумична додела минимизује проблем контрафактуалности, и опсервационе 
+студије, које се ослањају на статистичке приступе за валидну процену каузалних ефеката.
 
- Fundamentalni problem kauzalnog zaključivanja → ne možemo posmatrati oba ishoda za istu jedinku (tretiran i netretiran).
-
-Da bismo procenili kauzalni efekat (ATE) → moramo “rekonstruisati” kontrafaktualne ishode korišćenjem statističkih metoda.
-
-Tu dolaze u igru metode poput regresije, matching-a, propensity score weighting-a – sve su to načini da što bolje aproksimiramo 
-nedostajuće kontrafaktualne podatke.
- .
-
+Тако дефинисано, процена ATE-а представља само један део ширег оквира каузалног закључивања. У наредним деловима рада фокусираћемо се на конкретне приступе који се 
+користе за процену каузалних ефеката у различитим контекстима: прво ћемо размотрити рандомизоване експерименте, који омогућавају директну контролу доделе третмана и 
+минимизирају проблем контрафактуалности, а затим ћемо се осврнути на опсервационе студије, у којима се процене ATE-а ослањају на статистичке методе и претпоставке за 
+контролу конфаундера.
 
     \subsubsection{АТЕ (Average Treatment Effect), дефиниција}
     \subsubsection{проблем контрафактуала, немогућност да посматрамо оба света истовремено}
