@@ -1,0 +1,44 @@
+\begin{thebibliography}{7}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Carlson(2025)]{simpson}
+B.~W. Carlson.
+\newblock Simpson’s paradox.
+\newblock \emph{Encyclopedia Britannica}, 2025.
+
+\bibitem[Cunningham(2021)]{mixtape}
+S.~Cunningham.
+\newblock \emph{Causal Inference: The Mixtape}.
+\newblock 2021.
+
+\bibitem[Gelman and Hill(2007)]{models}
+A.~Gelman and J.~Hill.
+\newblock \emph{Data Analysis Using Regression and Multilevel/Hierarchical
+  Models}.
+\newblock 2007.
+
+\bibitem[Hernan and Robins(2020)]{whatif}
+M.~A. Hernan and J.~M. Robins.
+\newblock \emph{Causal Inference: What If}.
+\newblock 2020.
+
+\bibitem[Imbens and Rubin(2015)]{}
+G.~W. Imbens and D.~B. Rubin.
+\newblock \emph{Causal inference for statistics, social, and biomedical
+  sciences}.
+\newblock 2015.
+
+\bibitem[Messerli(2012)]{nobel}
+F.~H. Messerli.
+\newblock Chocolate consumption, cognitive function, and nobel laureates.
+\newblock \emph{The New England Journal of Medicine}, 2012.
+
+\bibitem[Vigen()]{correlations}
+T.~Vigen.
+\newblock \emph{Spurious correlations}.
+
+\end{thebibliography}
